@@ -5,13 +5,24 @@
 @using KendoWindow_Ajax_Form.Models;
 
 <div class="container-fluid placeholders">
-    <div class="row">
-        <div >
+    <div >
+        <div>
             <h2>All the Data</h2>
             @(Html.Kendo().Grid<OrderViewModel>()
                 .Name("grid")
                 .Reorderable(reorder => reorder.Columns(true))
      .Resizable(resize => resize.Columns(true))
+     .Columns(columns =>
+        {
+        @*columns.Template(@<text></text>).Draggable(true);*@
+            columns.Bound(p => p.ContactName).Title("ContactName");
+            columns.Bound<DateTime>(p => p.OrderDate).Title("OrderDate").Format("{0:dd/MM/yyyy h:mm:ss}");
+            columns.Bound<DateTime>(p => p.ShippedDate).Title("OrderDate").Format("{0:dd/MM/yyyy h:mm:ss}");
+
+
+
+
+        })
                 .Pageable()
             .Scrollable()
             .Sortable()
