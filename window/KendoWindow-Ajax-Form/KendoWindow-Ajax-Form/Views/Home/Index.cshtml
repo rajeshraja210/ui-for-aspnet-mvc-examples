@@ -6,10 +6,16 @@
 
 <div class="container-fluid placeholders">
     <div class="row">
-        <div class="col-xs-12 col-md-6">
+        <div >
             <h2>All the Data</h2>
             @(Html.Kendo().Grid<OrderViewModel>()
                 .Name("grid")
+                .Reorderable(reorder => reorder.Columns(true))
+     .Resizable(resize => resize.Columns(true))
+                .Pageable()
+            .Scrollable()
+            .Sortable()
+            .Navigatable()
                 .DataSource(datasource => datasource
                     .Ajax()
                     .Read(read => read.Action("GetOrders", "OrdersData"))

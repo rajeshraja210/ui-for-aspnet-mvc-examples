@@ -2,28 +2,33 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common.min.css">
+    	<link href="https://cdn.kendostatic.com/2022.2.621/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common.min.css">
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.default.min.css">
 
 
     <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
-	<script src="http://kendo.cdn.telerik.com/2017.2.504/js/kendo.aspnetmvc.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2017.2.504/js/kendo.timezones.min.js"></script>
+    	<link href="https://cdn.kendostatic.com/2022.2.621/styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.kendostatic.com/2022.2.621/js/jszip.min.js"></script>
+	<script src="https://cdn.kendostatic.com/2022.2.621/js/kendo.all.min.js"></script>
+	<script src="https://cdn.kendostatic.com/2022.2.621/js/kendo.aspnetmvc.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2017.2.504/js/kendo.timezones.min.js"></script>
 
     @{
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
     }
 
-    <script src="http://kendo.cdn.telerik.com/2017.2.504/js/cultures/kendo.culture." + culture + ".min.js"></script>
+    @*<script src="http://kendo.cdn.telerik.com/2022.2.621/js/cultures/kendo.culture." + culture + ".min.js"></script>*@
 
     @* Set the current culture *@
     <script>
         kendo.culture("@culture");
     </script>
+	<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 </head>
-	<body>
+	<body class="k-rtl">
 		<header>
 			<div class="content-wrapper">
 				<div class="float-left">
