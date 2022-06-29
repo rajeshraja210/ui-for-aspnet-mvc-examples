@@ -11,6 +11,24 @@
         views.AgendaView();
     })
     .Timezone("Etc/UTC")
+    .Events(e =>
+    {
+        e.DataBinding("scheduler_dataBinding");
+        e.DataBound("scheduler_dataBound");
+        e.Change("scheduler_change");
+        e.Save("scheduler_save");
+        e.Remove("scheduler_remove");
+        e.Cancel("scheduler_cancel");
+        e.Edit("scheduler_edit");
+        e.Add("scheduler_add");
+        e.MoveStart("scheduler_moveStart");
+        e.Move("scheduler_move");
+        e.MoveEnd("scheduler_moveEnd");
+        e.ResizeStart("scheduler_resizeStart");
+        e.Resize("scheduler_resize");
+        e.ResizeEnd("scheduler_resizeEnd");
+        e.Navigate("scheduler_navigate");
+    })
     .Resources(resource =>
     {
         resource.Add(m => m.OwnerID)
@@ -18,10 +36,10 @@
             .DataTextField("Text")
             .DataValueField("Value")
             .DataColorField("Color")
-            .BindTo(new[] { 
+            .BindTo(new[] {
                 new { Text = "Alex", Value = 1, Color = "#f8a398" } ,
                 new { Text = "Bob", Value = 2, Color = "#51a0ed" } ,
-                new { Text = "Charlie", Value = 3, Color = "#56ca85" } 
+                new { Text = "Charlie", Value = 3, Color = "#56ca85" }
             });
     })
     .DataSource(d => d
@@ -36,21 +54,112 @@
     )
 )
 
-
+<div id="output"></div>
 <script>
-
-$(function() {
-    var scheduler = $("#scheduler").data("kendoScheduler");
-
-    // WebAPI needs the ID of the entity to be part of the URL e.g. PUT /api/Task/80
-    scheduler.dataSource.transport.options.update.url = function (data) {
-        return "api/Task/" + data.TaskID;
+    function scheduler_dataBinding(e) {
+        console.log("dataBinding");
     }
 
-    // WebAPI needs the ID of the entity to be part of the URL e.g. DELETE /api/Task/80
-    scheduler.dataSource.transport.options.destroy.url = function (data) {
-        return "api/Task/" + data.TaskID;
+    function scheduler_dataBound(e) {
+        console.log("dataBound");
     }
-});
+
+    function scheduler_change(e) {
+        var start = e.start; //selection start date
+        var end = e.end; //selection end date
+        var slots = e.slots; //list of selected slots
+        var events = e.events; //list of selected Scheduler events
+
+        var message = "change:: selection from {0} till {1}";
+
+        if (e.event) {
+            message += ". The selected event is '" + e.event.title + "'";
+        }
+        var targetDiv = document.getElementById('output');
+        var content = document.createTextNode(message.format(start, end));
+        targetDiv.appendChild(content);
+        console.log(message.format(start, end));
+    }
+
+    function scheduler_save(e) {
+        console.log("save");
+    }
+
+    function scheduler_remove(e) {
+        console.log("remove");
+    }
+
+    function scheduler_cancel(e) {
+        console.log("cancel");
+    }
+
+    function scheduler_edit(e) {
+        console.log("edit");
+    }
+
+    function scheduler_add(e) {
+        console.log("add");
+    }
+
+    function scheduler_moveStart(e) {
+        console.log("moveStart");
+    }
+
+    function scheduler_move(e) {
+        console.log("move");
+    }
+    String.prototype.format = function () {
+        a = this;
+        for (k in arguments) {
+            a = a.replace("{" + k + "}", arguments[k])
+        }
+        return a
+    }
+    function scheduler_moveEnd(e) {
+        console.log("moveEnd");
+        var start = e.start; //selection start date
+        var end = e.end; //selection end date
+        var slots = e.slots; //list of selected slots
+        var events = e.events; //list of selected Scheduler events
+
+        var message = "change:: selection from {0} till {1}";
+
+        if (e.event) {
+            message += ". The selected event is '" + e.event.title + "'";
+        }
+        var targetDiv = document.getElementById('output');
+        var content = document.createTextNode(message.format(start, end));
+        targetDiv.appendChild(content);
+        console.log(message.format(start, end));
+    }
+
+    function scheduler_resizeStart(e) {
+        console.log("resizeStart");
+    }
+
+    function scheduler_resize(e) {
+        console.log("resize");
+    }
+
+    function scheduler_resizeEnd(e) {
+        console.log("resizeEnd");
+    }
+
+    function scheduler_navigate(e) {
+        console.log(kendo.format("navigate:: action:{0}; view:{1}; date:{2:d};", e.action, e.view, e.date));
+    }
+    $(function () {
+        var scheduler = $("#scheduler").data("kendoScheduler");
+
+        // WebAPI needs the ID of the entity to be part of the URL e.g. PUT /api/Task/80
+        scheduler.dataSource.transport.options.update.url = function (data) {
+            return "api/Task/" + data.TaskID;
+        }
+
+        // WebAPI needs the ID of the entity to be part of the URL e.g. DELETE /api/Task/80
+        scheduler.dataSource.transport.options.destroy.url = function (data) {
+            return "api/Task/" + data.TaskID;
+        }
+    });
 
 </script>
