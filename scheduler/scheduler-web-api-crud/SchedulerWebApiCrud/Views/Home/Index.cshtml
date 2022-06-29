@@ -79,6 +79,7 @@
         var content = document.createTextNode(message.format(start, end));
         targetDiv.appendChild(content);
         console.log(message.format(start, end));
+        console.log("event: " + e.event);
     }
 
     function scheduler_save(e) {
@@ -129,8 +130,20 @@
         }
         var targetDiv = document.getElementById('output');
         var content = document.createTextNode(message.format(start, end));
+        var linebreak = document.createElement("br");
         targetDiv.appendChild(content);
+        targetDiv.appendChild(linebreak);
+        targetDiv.appendChild(linebreak);
+
         console.log(message.format(start, end));
+        var str = JSON.stringify(e.event);
+        var content1 = document.createTextNode("event: " + str);
+        targetDiv.appendChild(content1);
+        targetDiv.appendChild(linebreak);
+        targetDiv.appendChild(linebreak);
+
+
+        console.log("event: " + e.event);
     }
 
     function scheduler_resizeStart(e) {
