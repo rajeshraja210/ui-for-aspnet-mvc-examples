@@ -8,7 +8,7 @@
     <div>
         <div>
             <h2>All the Data</h2>
-            @(Html.Kendo().Grid<OrderViewModel>()
+            @(Html.Kendo().Grid<SRViewModel>()
                 .Name("grid")
                 .Reorderable(reorder => reorder.Columns(true))
      .Resizable(resize => resize.Columns(true))
@@ -16,7 +16,7 @@
         {
         @*columns.Template(@<text></text>).Draggable(true);*@
             columns.Bound(p => p.ContactName).Title("ContactName");
-            columns.Bound<DateTime>(p => p.OrderDate).Title("OrderDate").Format("{0:dd/MM/yyyy h:mm:ss}");
+            columns.Bound<DateTime>(p => p.SRDate).Title("SRDate").Format("{0:dd/MM/yyyy h:mm:ss}");
             columns.Bound<DateTime>(p => p.ShippedDate).Title("ShippedDate").Format("{0:dd/MM/yyyy h:mm:ss}");
         })
                 .Pageable()
@@ -25,7 +25,7 @@
             .Navigatable()
                 .DataSource(datasource => datasource
                     .Ajax()
-                    .Read(read => read.Action("GetOrders", "OrdersData"))
+                    .Read(read => read.Action("GetOrders", "SRData"))
 
             )
             )

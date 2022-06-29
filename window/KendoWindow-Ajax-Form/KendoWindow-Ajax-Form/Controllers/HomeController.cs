@@ -16,14 +16,14 @@ namespace KendoWindow_Ajax_Form.Controllers
         {
             try
             {
-                IEnumerable<OrderViewModel> testResult = OrdersBinderHelper.RetrunListOfOrders();
+                IEnumerable<SRViewModel> testResult = SRBinderHelper.RetrunListOfOrders();
             }
             catch (Exception)
             {
-                OrdersBinderHelper.WriteListOfOrders(new List<OrderViewModel>()
+                SRBinderHelper.WriteListOfOrders(new List<SRViewModel>()
                 {
-                    new OrderViewModel() { ContactName = "Charles", CustomerID="1", OrderDate= DateTime.Now.AddDays(-1), OrderID=1,ShippedDate = DateTime.Now },
-                    new OrderViewModel() { ContactName = "John", CustomerID="2", OrderDate= DateTime.Now.AddDays(-2), OrderID=2,ShippedDate = DateTime.Now },
+                    new SRViewModel() { ContactName = "Charles", CustomerID="1", SRDate= DateTime.Now.AddDays(-1), SRID=1,ShippedDate = DateTime.Now },
+                    new SRViewModel() { ContactName = "John", CustomerID="2", SRDate= DateTime.Now.AddDays(-2), SRID=2,ShippedDate = DateTime.Now },
                 });
             }
         }
